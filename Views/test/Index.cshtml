@@ -1,0 +1,32 @@
+﻿@model MVCApp.Models.MyViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+@*@using (Html.BeginForm())
+{*@
+<h1>H1</h1>
+<h1>
+    @Model.Items.Select(a=>a.Name)
+</h1>
+
+<h1>Drop Down List </h1>
+<div>
+    <table>
+        <tr>
+            <td>Items DropDown</td>
+            <td>@Html.DropDownListFor(m=>m.sitms,Model.sitms)</td>
+        </tr>
+    </table>
+</div>
+
+@foreach (var itm in Model.Items)
+{
+    <h1> itm.Name</h1>
+    <h1> @itm.Name</h1>
+    @Html.DisplayFor(md=>itm.Name)
+    ;
+}
+@*}*@
