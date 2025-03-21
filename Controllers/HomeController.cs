@@ -53,6 +53,9 @@ namespace MVCApp.Controllers
 
                                 );
 
+
+            // test
+
             var grpby = _mvcAppContext.blogs.Join(_mvcAppContext.posts,
                  blog => new { blog.Id, blog.Name },
                  post => new { Id=post.Blog.Id, Name= post.PostName },
