@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVCApp.Models;
+using Microsoft.EntityFrameworkCore.Migrations;
+
 
 namespace MVCApp.Data;
 
@@ -10,12 +12,33 @@ public class MvcAppContext : DbContext
 
     }
 
+
+  
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Shop>(entity =>
         {
             entity.Property<int>(e => e.ShopId);
+
+            entity.Property(e => e.ShopAddress).HasDefaultValue("Prafull");
+
+            entity.Property(e => e.price3).HasDefaultValue(100);
         });
+
+        //modelBuilder.Entity<Shop>(entity =>
+        //{
+        //    //entity.Property(e => e.ShopAddress).HasDefaultValue("xyz");
+
+        //    entity.Property(e => e.price3).HasDefaultValue("100");
+
+
+
+        //});
+
+
+
+
     }
     public DbSet<Items> Items { get; set; }
     public DbSet<Shop> shops { get; set; }

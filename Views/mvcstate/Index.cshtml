@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Http;
+
+
+@*7
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    TempData.Keep("name");
+    TempData.Peek("namepeek");
+
+}
+
+<div>
+    View Bag :  @ViewBag.Names
+</div>
+
+
+<div>
+    View Data :  @ViewData["name"];
+</div>
+
+
+<div>
+    Temp Data :  @TempData["name"];
+</div>
+
+
+<div>
+    Temp Data Peek :  @TempData["namepeek"];
+</div>
+

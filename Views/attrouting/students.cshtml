@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MVCApp.Controllers.Student>;
+
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(md=> md.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(md=> md.Name)
+        </th>
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(md=> i.Id)
+            </th>
+            <th>
+                @Html.DisplayFor(md=> i.Name)
+            </th>
+        </tr>
+    }
+</table>
+
+<h2> Student Action List </h2>
+@foreach (var i in Model)
+{
+    <li> @Html.ActionLink(i.Name,"Students", new {id = i.Id})</li>
+}
+
+
+
+
+

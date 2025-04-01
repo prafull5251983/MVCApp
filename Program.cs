@@ -2,6 +2,7 @@ using MVCApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using MVCApp.Models;
+using Microsoft.Extensions.Options;
 
 
 
@@ -60,12 +61,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.
     AddDbContext<MvcAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("con")));
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });
+
+builder.Services.AddSession(opt =>
+{
+    opt.IdleTimeout = TimeSpan.FromSeconds(5);
+    opt.Cookie.HttpOnly = true;
+    opt.Cookie.IsEssential = true;
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -76,15 +87,19 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseMiddleware<CustomMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 
 app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseSession();
+
+//app.MapRazorPages();
+app.MapDefaultControllerRoute();
+
 
 app.Run();

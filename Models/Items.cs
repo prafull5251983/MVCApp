@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Metrics;
@@ -63,6 +64,22 @@ public class Shop
     public int ShopId { get; set; }
     public string Name { get; set; }
     public string Price { get; set; }
+
+    //public string PriceII { get; set; }
+
+
+    [Required]
+    public int price3 { get; set; }
+
+    [Required]
+    public string ShopAddress { get; set; }
+
+    [NotMapped]
+    public DateTime LoadedFromDatabase { get; set; }
+
+    [Required]
+    public int price4 { get; set; }
+
 }
 
 [PrimaryKey(nameof(Name), nameof(Price))]
